@@ -111,19 +111,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Person.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Person.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pojos/Person.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="33" selection-start="1441" selection-end="1441" vertical-scroll-proportion="0.3392857" vertical-offset="371" max-vertical-offset="1386">
+            <state line="31" column="33" selection-start="1441" selection-end="1441" vertical-scroll-proportion="0.0" vertical-offset="371" max-vertical-offset="1386">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HealthProfileReader.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="HealthProfileReader.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/HealthProfileReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="29" selection-start="320" selection-end="320" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2124">
+            <state line="59" column="0" selection-start="1950" selection-end="1950" vertical-scroll-proportion="0.29336736" vertical-offset="839" max-vertical-offset="2124">
               <folding />
             </state>
           </provider>
@@ -535,12 +535,12 @@
       <workItem from="1411141538859" duration="1806000" />
       <workItem from="1411146504306" duration="666000" />
       <workItem from="1411147177981" duration="517000" />
-      <workItem from="1411209717257" duration="2576000" />
+      <workItem from="1411209717257" duration="2658000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6418000" />
+    <option name="totallyTimeSpent" value="6500000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -683,16 +683,16 @@
         <state line="6" column="11" selection-start="119" selection-end="119" vertical-scroll-proportion="0.1785124" vertical-offset="0" max-vertical-offset="648" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HealthProfileReader.java">
+    <entry file="file://$PROJECT_DIR$/src/pojos/Person.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="29" selection-start="320" selection-end="320" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2124">
+        <state line="31" column="33" selection-start="1441" selection-end="1441" vertical-scroll-proportion="0.0" vertical-offset="371" max-vertical-offset="1386">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pojos/Person.java">
+    <entry file="file://$PROJECT_DIR$/src/HealthProfileReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="33" selection-start="1441" selection-end="1441" vertical-scroll-proportion="0.3392857" vertical-offset="371" max-vertical-offset="1386">
+        <state line="59" column="0" selection-start="1950" selection-end="1950" vertical-scroll-proportion="0.29336736" vertical-offset="839" max-vertical-offset="2124">
           <folding />
         </state>
       </provider>
