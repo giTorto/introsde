@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<project name= "myFirstProject" default= "compile" basedir= "." >
+    <property name="buildDir" value="build" />
+    <property name="classesDir" value="${buildDir}/classes" />
+    <property name="distDir" value="dist" />
+
+    <property environment="env"/>
+    <!-- Remember, update the following to fit your filesystem -->
+    <property name="AXIS2_HOME" value="/home/giulian/axis2-1.6.2"/>
+    <property name="AXIS2_HOME_TOMCAT" value="/home/giulian/apache-tomcat-7.0.39/webapps/axis2"/>
+
+    <target name="init">
+          <echo message="starting initialization" />
+          <mkdir dir="${buildDir}" />
+          <mkdir dir="${classesDir}" />
+          <mkdir dir="${distDir}" />
+          <echo message="build completed" />
+       </target>
+       <target name="compile" depends="init">
+          <echo message="start compiling" /> 
+          <javac encoding="utf-8" srcdir="src" destdir="${classesDir}" debug="true" includeAntRuntime="no" />
+          <echo message="compilation complete" />
+       </target>
+       <target name="build" depends="compile" />
+       <target name="clean" >
+          <echo message="start cleaning" />
+            <delete dir="${buildDir}" />
+            <delete dir="${distDir}" />
+          <echo message="deletion completed" />
+       </target>
+
+
+        <target name="archive" depends="compile">
+           <echo>Starting to archive...</echo>
+           <jar destfile="dist/project.jar" basedir="build">
+                <manifest>
+                    <attribute name="Main-Class" value="HealthProfileReader" />
+                    <attribute name="Class-Path" value="build"/>
+                </manifest>
+           </jar>
+           <echo>Archived!</echo>
+        </target>
+
+       <target name="execute" depends="compile">
+           <java classname="HealthProfileReader" classpath="${classesDir}">
+               <arg value="createPerson"/>
+               <arg value="30"/>
+               <arg value="John"/>
+               <arg value="Doe"/>
+               <arg value="1986-08-38"/>
+           </java>
+           <java classname="HealthProfileReader" classpath="${classesDir}">
+               <arg value="updatehealthproﬁle"/>
+               <arg value="30"/>
+               <arg value="170.02"/>
+               <arg value="80"/>
+           </java>
+           <java classname="HealthProfileReader" classpath="${classesDir}">
+               <arg value="getBMI"/>
+               <arg value="30"/>
+           </java>
+       </target>
+
+    <path id="axis2.classpath">
+        <fileset dir="${AXIS2_HOME}/lib">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="compile.service">
+        <mkdir dir="${buildDir}"/>
+        <mkdir dir="${buildDir}/classes"/>
+
+        <!--First let's compile the classes-->
+        <javac debug="on"
+               fork="true"
+               destdir="${buildDir}/classes"
+               srcdir="${basedir}/src"
+               classpathref="axis2.classpath">
+        </javac>
+    </target>
+
+    <target name="generate.wsdl" depends="compile.service">
+        <taskdef name="java2wsdl"
+                 classname="org.apache.ws.java2wsdl.Java2WSDLTask"
+                 classpathref="axis2.classpath"/>
+        <java2wsdl className="HealthProfileReader"
+                   outputLocation="${classesDir}"
+                   targetNamespace="http://quickstart.samples/"
+                   schemaTargetNamespace="http://quickstart.samples/xsd">
+            <classpath>
+                <pathelement path="axis2.classpath"/>
+                <pathelement location="${buildDir}/classes"/>
+            </classpath>
+        </java2wsdl>
+    </target>
+
+    <target name="generate.service" depends="compile.service">
+        <!--aar them up -->
+        <copy toDir="${buildDir}/classes" failonerror="false">
+            <fileset dir="${basedir}/resources">
+                <include name="**/*.xml"/>
+            </fileset>
+        </copy>
+        <jar destfile="${buildDir}/HealthProfileReader.aar">
+            <fileset excludes="**/Test.class" dir="${buildDir}/classes"/>
+        </jar>
+        <!-- deploy to axis2 standalone server -->
+        <copy file="${buildDir}/HealthProfileReader.aar"
+              toDir="${AXIS2_HOME}/repository/services"
+              overwrite="yes">
+        </copy>
+
+        <!-- deploy to axis2 web application deployed in tomcat -->
+        <copy file="${buildDir}/HealthProfileReader.aar"
+              toDir="${AXIS2_HOME_TOMCAT}/WEB-INF/services"
+              overwrite="yes">
+        </copy>
+    </target>
+
+    <target name="remove.service">
+        <!-- remove the service from axis2 standalone server -->
+        <delete file="${AXIS2_HOME}/repository/services/StockQuoteService.aar">
+        </delete>
+
+        <!-- remove the service from axis2 web application deployed in tomcat -->
+        <delete file="${AXIS2_HOME_TOMCAT}/WEB-INF/services/StockQuoteService.aar">
+        </delete>
+    </target>
+
+   </project>
+

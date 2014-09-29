@@ -1,0 +1,29 @@
+<service name="HealthProfileReader"
+        scope="application"  targetNamespace="http://quickstart.samples/" >
+        <!-- Scope and nameSpace must be later matched inthe build.xml -->
+
+        <!-- a description of what the service does -->
+    <description>Health Profile Reader</description>
+
+        <!-- the classes that will process incoming messages to the service -->
+        <!-- we are using standar message receivers already bundled with axis2 -->
+    <messageReceivers>
+        <messageReceiver
+            mep="http://www.w3.org/2004/08/wsdl/in-only"
+            class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver"
+        />
+        <messageReceiver
+        mep="http://www.w3.org/2004/08/wsdl/in-out"
+        class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"
+        />
+    </messageReceivers>
+
+        <!-- definition of the xml schema used by the service -->
+    <schema schemaNamespace="http://quickstart.samples/xsd"/>
+
+        <!-- specification of what Java class is being exposed as a service -->
+    <parameter name="ServiceClass">
+        HealthProfileReader
+    </parameter>
+
+</service>
